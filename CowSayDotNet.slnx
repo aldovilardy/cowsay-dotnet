@@ -1,3 +1,63 @@
 <Solution>
-  <Project Path="CowSayDotNet/CowSayDotNet.csproj" />
+  <Folder Name="/assets/">
+    <File Path="assets/cow-face_1f42e.ico" />
+  </Folder>
+  <Folder Name="/assets/cows/">
+    <File Path="assets/cows/beavis.zen.cow" />
+    <File Path="assets/cows/bong.cow" />
+    <File Path="assets/cows/bud-frogs.cow" />
+    <File Path="assets/cows/bunny.cow" />
+    <File Path="assets/cows/cheese.cow" />
+    <File Path="assets/cows/cower.cow" />
+    <File Path="assets/cows/daemon.cow" />
+    <File Path="assets/cows/default.cow" />
+    <File Path="assets/cows/dragon-and-cow.cow" />
+    <File Path="assets/cows/dragon.cow" />
+    <File Path="assets/cows/elephant-in-snake.cow" />
+    <File Path="assets/cows/elephant.cow" />
+    <File Path="assets/cows/eyes.cow" />
+    <File Path="assets/cows/flaming-sheep.cow" />
+    <File Path="assets/cows/ghostbusters.cow" />
+    <File Path="assets/cows/head-in.cow" />
+    <File Path="assets/cows/hellokitty.cow" />
+    <File Path="assets/cows/kiss.cow" />
+    <File Path="assets/cows/kitty.cow" />
+    <File Path="assets/cows/koala.cow" />
+    <File Path="assets/cows/kosh.cow" />
+    <File Path="assets/cows/luke-koala.cow" />
+    <File Path="assets/cows/mech-and-cow.cow" />
+    <File Path="assets/cows/meow.cow" />
+    <File Path="assets/cows/milk.cow" />
+    <File Path="assets/cows/moofasa.cow" />
+    <File Path="assets/cows/moose.cow" />
+    <File Path="assets/cows/mutilated.cow" />
+    <File Path="assets/cows/ren.cow" />
+    <File Path="assets/cows/satanic.cow" />
+    <File Path="assets/cows/sheep.cow" />
+    <File Path="assets/cows/skeleton.cow" />
+    <File Path="assets/cows/small.cow" />
+    <File Path="assets/cows/sodomized.cow" />
+    <File Path="assets/cows/squirrel.cow" />
+    <File Path="assets/cows/stegosaurus.cow" />
+    <File Path="assets/cows/stimpy.cow" />
+    <File Path="assets/cows/supermilker.cow" />
+    <File Path="assets/cows/surgery.cow" />
+    <File Path="assets/cows/telebears.cow" />
+    <File Path="assets/cows/three-eyes.cow" />
+    <File Path="assets/cows/turkey.cow" />
+    <File Path="assets/cows/turtle.cow" />
+    <File Path="assets/cows/tux.cow" />
+    <File Path="assets/cows/udder.cow" />
+    <File Path="assets/cows/vader-koala.cow" />
+    <File Path="assets/cows/vader.cow" />
+    <File Path="assets/cows/www.cow" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Cowsay.Application/Cowsay.Application.csproj" />
+    <Project Path="src/Cowsay.Cli/Cowsay.Cli.csproj" Id="4e0ec851-5d2d-4d4b-b158-0feb8cdd452d" />
+    <Project Path="src/CowSay.Core/CowSay.Core.csproj" Id="90644194-c0a9-427d-b92d-3fba6e5e37ae" />
+    <Project Path="src/Cowsay.Infrastructure/Cowsay.Infrastructure.csproj" />
+    <Project Path="src/Cowsay.PowerShell/Cowsay.PowerShell.csproj" />
+    <Project Path="src/Cowsay.Shared/Cowsay.Shared.csproj" />
+  </Folder>
 </Solution>
