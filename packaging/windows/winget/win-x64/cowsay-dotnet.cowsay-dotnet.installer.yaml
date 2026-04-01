@@ -17,7 +17,7 @@ Commands:
 Installers:
   - Architecture: x64
     InstallerUrl: https://github.com/cowsay-dotnet/cowsay-dotnet/releases/download/v1.0.0/cowsay-dotnet-1.0.0-win-x64.msi
-    InstallerSha256: 2ACF9BD56601B262DAFD555222C67AF61F51A91A9C91D9BC4E620A314B413E4A
+    InstallerSha256: 612D041C03597EB5F3290428166591FFF2C40D47B549F42CC1372AE9A134E1B5
     ProductCode: "{7E3F8A2B-1C4D-4E5F-9A6B-8C7D0E1F2A3B}"
 ManifestType: installer
 ManifestVersion: 1.6.0

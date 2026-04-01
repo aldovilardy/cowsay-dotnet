@@ -34,11 +34,10 @@ $Version = $Props.Project.PropertyGroup.Version
 $RidToPlatform = @{
     "win-x64"   = "x64"
     "win-x86"   = "x86"
-    "win-arm"   = "arm"
     "win-arm64" = "arm64"
 }
 
-$WindowsRids = @("win-x64", "win-x86", "win-arm", "win-arm64")
+$WindowsRids = @("win-x64", "win-x86", "win-arm64")
 
 if ($Rid) {
     if ($Rid -notin $WindowsRids) {

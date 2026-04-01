@@ -45,7 +45,7 @@ $ModuleName = "Cowsay.PowerShell"
 [xml]$Props = Get-Content (Join-Path $RepoRoot "Directory.Build.props")
 $Version = $Props.Project.PropertyGroup.Version
 
-$WindowsRids = @("win-x64", "win-x86", "win-arm", "win-arm64")
+$WindowsRids = @("win-x64", "win-x86", "win-arm64")
 
 if ($Rid) {
     if ($Rid -notin $WindowsRids) {

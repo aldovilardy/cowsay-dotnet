@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.6.0.schema.json
+PackageIdentifier: cowsay-dotnet.cowsay-dotnet
+PackageVersion: 1.0.0
+PackageLocale: en-US
+Publisher: cowsay-dotnet contributors
+PublisherUrl: https://github.com/cowsay-dotnet
+PackageName: cowsay-dotnet
+PackageUrl: https://github.com/cowsay-dotnet/cowsay-dotnet
+License: GPL-3.0-or-later
+LicenseUrl: https://github.com/cowsay-dotnet/cowsay-dotnet/blob/main/LICENSE
+ShortDescription: A .NET reimplementation of the classic cowsay/cowthink utility
+Description: |-
+  cowsay-dotnet is a faithful .NET reimplementation of the classic Unix
+  cowsay and cowthink programs. It generates ASCII art of a cow (or other
+  characters) saying or thinking a given message.
+  Self-contained — no .NET runtime required.
+Tags:
+  - cowsay
+  - cowthink
+  - ascii-art
+  - cli
+  - dotnet
+ManifestType: defaultLocale
+ManifestVersion: 1.6.0

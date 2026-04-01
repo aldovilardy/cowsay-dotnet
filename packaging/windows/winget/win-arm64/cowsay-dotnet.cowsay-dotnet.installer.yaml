@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.installer.1.6.0.schema.json
+PackageIdentifier: cowsay-dotnet.cowsay-dotnet
+PackageVersion: 1.0.0
+Platform:
+  - Windows.Desktop
+MinimumOSVersion: 10.0.17763.0
+InstallerType: msi
+Scope: machine
+InstallModes:
+  - interactive
+  - silent
+  - silentWithProgress
+UpgradeBehavior: install
+Commands:
+  - cowsay
+  - cowthink
+Installers:
+  - Architecture: arm64
+    InstallerUrl: https://github.com/cowsay-dotnet/cowsay-dotnet/releases/download/v1.0.0/cowsay-dotnet-1.0.0-win-arm64.msi
+    InstallerSha256: 6A290C8C74D8BFDFBE6DD0A7E89B53815481B9A7955F962AA0FDE75B3B4D3C1B
+    ProductCode: "{7E3F8A2B-1C4D-4E5F-9A6B-8C7D0E1F2A3B}"
+ManifestType: installer
+ManifestVersion: 1.6.0
