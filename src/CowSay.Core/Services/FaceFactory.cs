@@ -23,11 +23,11 @@ public class FaceFactory
         if (mode != CowMode.Default)
             return mode switch
             {
-                CowMode.Dead => new Face("xx", "U"),
+                CowMode.Dead => new Face("xx", "U "),
                 CowMode.Borg => new Face("==", "  "),
                 CowMode.Greedy => new Face("$$", "  "),
                 CowMode.Paranoid => new Face("@@", "  "),
-                CowMode.Stoned => new Face("**", "U"),
+                CowMode.Stoned => new Face("**", "U "),
                 CowMode.Tired => new Face("--", "  "),
                 CowMode.Wired => new Face("LL", "  "),
                 CowMode.Youthful => new Face("..", "  "),

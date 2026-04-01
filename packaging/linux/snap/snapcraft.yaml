@@ -1,0 +1,41 @@
+name: cowsay-dotnet
+base: core22
+version: '1.0.0'
+summary: A .NET reimplementation of the classic cowsay/cowthink utility
+description: |
+  cowsay-dotnet is a faithful .NET reimplementation of the classic Unix
+  cowsay and cowthink programs. It generates ASCII art of a cow (or other
+  characters) saying or thinking a given message.
+
+  This snap provides the cowsay and cowthink command-line tools as
+  self-contained binaries with no external runtime dependencies.
+
+grade: stable
+confinement: strict
+license: GPL-3.0-or-later
+
+architectures:
+  - build-on: amd64
+  - build-on: armhf
+  - build-on: arm64
+
+apps:
+  cowsay:
+    command: usr/bin/cowsay
+    plugs:
+      - home
+      - removable-media
+  cowthink:
+    command: usr/bin/cowthink
+    plugs:
+      - home
+      - removable-media
+
+parts:
+  cowsay-dotnet:
+    plugin: dump
+    source: .
+    organize:
+      cowsay: usr/bin/cowsay
+      cowthink: usr/bin/cowthink
+      assets/cows/*: usr/share/cowsay-dotnet/cows/

@@ -52,12 +52,63 @@
     <File Path="assets/cows/vader.cow" />
     <File Path="assets/cows/www.cow" />
   </Folder>
+  <Folder Name="/packaging/" />
+  <Folder Name="/packaging/linux/" />
+  <Folder Name="/packaging/linux/.pkg.tar.zst/">
+    <File Path="packaging/linux/.pkg.tar.zst/Makefile" />
+    <File Path="packaging/linux/.pkg.tar.zst/PKGBUILD" />
+  </Folder>
+  <Folder Name="/packaging/linux/deb/">
+    <File Path="packaging/linux/deb/build-deb.sh" />
+  </Folder>
+  <Folder Name="/packaging/linux/rpm/">
+    <File Path="packaging/linux/rpm/build-rpm.sh" />
+    <File Path="packaging/linux/rpm/cowsay-dotnet.spec" />
+  </Folder>
+  <Folder Name="/packaging/linux/snap/">
+    <File Path="packaging/linux/snap/build-snap.sh" />
+    <File Path="packaging/linux/snap/snapcraft.yaml" />
+  </Folder>
+  <Folder Name="/packaging/mac/" />
+  <Folder Name="/packaging/mac/brew/">
+    <File Path="packaging/mac/brew/build-brew.sh" />
+    <File Path="packaging/mac/brew/cowsay-dotnet.rb" />
+  </Folder>
+  <Folder Name="/packaging/mac/pkg/">
+    <File Path="packaging/mac/pkg/build-pkg.sh" />
+  </Folder>
+  <Folder Name="/packaging/windows/" />
+  <Folder Name="/packaging/windows/choco/">
+    <File Path="packaging/windows/choco/build-choco.ps1" />
+    <File Path="packaging/windows/choco/cowsay-dotnet.nuspec" />
+  </Folder>
+  <Folder Name="/packaging/windows/choco/tools/">
+    <File Path="packaging/windows/choco/tools/chocolateyinstall.ps1" />
+    <File Path="packaging/windows/choco/tools/chocolateyuninstall.ps1" />
+  </Folder>
+  <Folder Name="/packaging/windows/installer/">
+    <File Path="packaging/windows/installer/build-installer.ps1" />
+    <File Path="packaging/windows/installer/cowsay-dotnet.wxs" />
+  </Folder>
+  <Folder Name="/packaging/windows/powershell/">
+    <File Path="packaging/windows/powershell/build-psmodule.ps1" />
+  </Folder>
+  <Folder Name="/packaging/windows/winget/">
+    <File Path="packaging/windows/winget/build-winget.ps1" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/Cowsay.Application/Cowsay.Application.csproj" />
     <Project Path="src/Cowsay.Cli/Cowsay.Cli.csproj" Id="4e0ec851-5d2d-4d4b-b158-0feb8cdd452d" />
     <Project Path="src/CowSay.Core/CowSay.Core.csproj" Id="90644194-c0a9-427d-b92d-3fba6e5e37ae" />
+    <Project Path="src/Cowsay.Cowthink/Cowsay.Cowthink.csproj" />
     <Project Path="src/Cowsay.Infrastructure/Cowsay.Infrastructure.csproj" />
     <Project Path="src/Cowsay.PowerShell/Cowsay.PowerShell.csproj" />
     <Project Path="src/Cowsay.Shared/Cowsay.Shared.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Cowsay.Application.Tests/Cowsay.Application.Tests.csproj" Id="b59caec5-f5b5-4e1b-922b-d75931ff6baa" />
+    <Project Path="tests/Cowsay.Core.Tests/Cowsay.Core.Tests.csproj" Id="c7c3b19a-9714-4c7b-953e-a318219f124f" />
+    <Project Path="tests/Cowsay.Infrastructure.Tests/Cowsay.Infrastructure.Tests.csproj" Id="34583a01-3157-4d51-bfbd-a27987f8cc5c" />
+    <Project Path="tests/Cowsay.Tests/Cowsay.Tests.csproj" />
   </Folder>
 </Solution>

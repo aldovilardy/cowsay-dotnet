@@ -10,15 +10,18 @@ public class CowTemplateEngine : ITemplateEngine
     /// <inheritdoc/>
     public string Process(string template, Face face, char thoughtChar)
     {
+        // Pre-process any Perl-like code in the cowfile (e.g., chop, .=, unless)
+        var (eyes, tongue) = CowfilePreprocessor.Process(template, face.Eyes, face.Tongue);
+
         var content = ExtractAsciiContent(template);
 
         new List<KeyValuePair<string, string>>
         {
-            new(@"\$eyes|\${eyes}", face.Eyes),
-            new(@"\$tongue|\${tongue}", face.Tongue),
+            new(@"\$eyes|\${eyes}", eyes),
+            new(@"\$tongue|\${tongue}", tongue),
             new(@"\$thoughts|\${thoughts}", thoughtChar.ToString())
         }
-        .ForEach(kv => content = Regex.Replace(content, kv.Key, kv.Value));
+        .ForEach(kv => content = Regex.Replace(content, kv.Key, _ => kv.Value));
 
         return UnescapePerlStrings(content);
     }

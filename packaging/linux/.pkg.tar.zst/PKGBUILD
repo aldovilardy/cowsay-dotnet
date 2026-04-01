@@ -1,0 +1,63 @@
+# Maintainer: cowsay-dotnet contributors <cowsay-dotnet@users.noreply.github.com>
+
+pkgname=cowsay-dotnet
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="A .NET reimplementation of the classic cowsay/cowthink utility"
+arch=('x86_64' 'armv7h' 'aarch64')
+url="https://github.com/cowsay-dotnet/cowsay-dotnet"
+license=('GPL-3.0-or-later')
+depends=()
+provides=('cowsay-dotnet')
+conflicts=()
+
+# The source is expected to be a directory with pre-built binaries.
+# The Makefile handles copying the correct RID binaries based on CARCH.
+source=()
+sha256sums=()
+
+# Map Arch Linux CARCH to .NET RID
+_get_rid() {
+    case "$CARCH" in
+        x86_64)  echo "linux-x64" ;;
+        armv7h)  echo "linux-arm" ;;
+        aarch64) echo "linux-arm64" ;;
+        *)       echo "unknown" ;;
+    esac
+}
+
+package() {
+    local _rid
+    _rid=$(_get_rid)
+
+    local _build_output="${startdir}/../../../../build/output"
+    local _cowsay_bin="${_build_output}/cowsay/${_rid}"
+    local _cowthink_bin="${_build_output}/cowthink/${_rid}"
+    local _repo_root="${startdir}/../../../.."
+
+    if [[ ! -d "$_cowsay_bin" ]]; then
+        error "Published binaries not found at $_cowsay_bin"
+        error "Run 'build/publish.ps1 -Rid $_rid' first."
+        return 1
+    fi
+
+    # Install binaries
+    install -Dm755 "$_cowsay_bin/cowsay" "$pkgdir/usr/bin/cowsay"
+
+    if [[ -d "$_cowthink_bin" ]]; then
+        install -Dm755 "$_cowthink_bin/cowthink" "$pkgdir/usr/bin/cowthink"
+    fi
+
+    # Install cow files
+    install -dm755 "$pkgdir/usr/share/$pkgname/cows"
+    if [[ -d "$_cowsay_bin/assets/cows" ]]; then
+        install -Dm644 "$_cowsay_bin/assets/cows/"*.cow "$pkgdir/usr/share/$pkgname/cows/"
+    elif [[ -d "$_repo_root/assets/cows" ]]; then
+        install -Dm644 "$_repo_root/assets/cows/"*.cow "$pkgdir/usr/share/$pkgname/cows/"
+    fi
+
+    # Install license
+    if [[ -f "$_repo_root/LICENSE" ]]; then
+        install -Dm644 "$_repo_root/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+    fi
+}

@@ -4,18 +4,37 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <!-- Produce a class library DLL, not an executable -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cake.Powershell" Version="4.0.0" />
+    <PackageReference Include="PowerShellStandard.Library" Version="5.1.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.5" />
-    <PackageReference Include="System.IO.Packaging" Version="10.0.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Cowsay.Application\Cowsay.Application.csproj" />
     <ProjectReference Include="..\CowSay.Core\CowSay.Core.csproj" />
     <ProjectReference Include="..\Cowsay.Infrastructure\Cowsay.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <!-- Copy the module manifest and script module to the output directory -->
+  <ItemGroup>
+    <None Update="Cowsay.PowerShell.psd1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Cowsay.PowerShell.psm1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <!-- Bundle the cow files alongside the module DLLs -->
+  <ItemGroup>
+    <Content Include="..\..\assets\cows\**\*.cow">
+      <Link>assets\cows\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

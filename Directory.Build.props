@@ -1,0 +1,14 @@
+<Project>
+  <PropertyGroup>
+    <Version>1.0.0</Version>
+    <Authors>Aldo Vilardy</Authors>
+    <Company>cowsay-dotnet</Company>
+    <Product>cowsay-dotnet</Product>
+    <Description>A .NET reimplementation of the classic Unix cowsay/cowthink utility, inspired by the original cowsay by Tony Monroe and the cowsay-org fork by Andrew Janke.</Description>
+    <Copyright>Copyright (c) 2026 Aldo Vilardy</Copyright>
+    <RepositoryUrl>https://github.com/cowsay-dotnet/cowsay-dotnet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/cowsay-dotnet/cowsay-dotnet</PackageProjectUrl>
+  </PropertyGroup>
+</Project>

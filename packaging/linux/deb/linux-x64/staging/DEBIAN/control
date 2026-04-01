@@ -1,0 +1,15 @@
+Package: cowsay-dotnet
+Version: 1.0.0
+Section: games
+Priority: optional
+Architecture: amd64
+Maintainer: cowsay-dotnet contributors <cowsay-dotnet@users.noreply.github.com>
+Description: A .NET reimplementation of the classic cowsay/cowthink utility
+ cowsay-dotnet is a faithful .NET reimplementation of the classic Unix
+ cowsay and cowthink programs. It generates ASCII art of a cow (or other
+ characters) saying or thinking a given message.
+ .
+ This package provides the cowsay and cowthink command-line tools as
+ self-contained binaries with no external runtime dependencies.
+Homepage: https://github.com/cowsay-dotnet/cowsay-dotnet
+Installed-Size: 72628

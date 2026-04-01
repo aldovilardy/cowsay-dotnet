@@ -1,0 +1,14 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Shell scripts must have Unix line endings and be executable
+*.sh text eol=lf
+
+# PowerShell scripts can use either line ending
+*.ps1 text
+
+# Windows-specific files
+*.wxs text eol=crlf
+
+# Binary files
+*.cow text eol=lf

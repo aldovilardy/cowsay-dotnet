@@ -140,11 +140,13 @@ rootCommand.SetAction(parseResult =>
 return await rootCommand.Parse(args).InvokeAsync();
 
 /// <summary>
-/// Reads the message from standard input if input is redirected.
+/// Reads the message from standard input.
+/// Matches classic cowsay behavior: if run with no arguments, it accepts standard input
+/// (either piped/redirected or typed interactively until EOF via Ctrl+D/Ctrl+Z).
 /// </summary>
-/// <returns>The message read from standard input, or an empty string if input is not redirected.</returns>
+/// <returns>The message read from standard input.</returns>
 static string ReadMessageFromStandardInput() =>
-    !Console.IsInputRedirected ? string.Empty : Console.In.ReadToEnd().TrimEnd('\r', '\n');
+    Console.In.ReadToEnd().TrimEnd('\r', '\n');
 
 /// <summary>
 /// Determines if the current process is a cowthink invocation.

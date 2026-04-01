@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>cowsay-dotnet</id>
+    <!-- Version is replaced at build time by build-choco.ps1 -->
+    <version>1.0.0</version>
+    <title>cowsay-dotnet</title>
+    <authors>Aldo Vilardy</authors>
+    <owners>cowsay-dotnet</owners>
+    <projectUrl>https://github.com/cowsay-dotnet/cowsay-dotnet</projectUrl>
+    <licenseUrl>https://github.com/cowsay-dotnet/cowsay-dotnet/blob/main/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A .NET reimplementation of the classic Unix cowsay/cowthink utility, inspired by the original cowsay by Tony Monroe and the cowsay-org fork by Andrew Janke. Generates ASCII art of a cow (or other characters) saying or thinking a given message. Licensed under GPL-3.0-or-later. Self-contained — no .NET runtime required.</description>
+    <summary>Classic cowsay/cowthink for Windows, reimplemented in .NET (GPL-3.0-or-later)</summary>
+    <tags>cowsay cowthink ascii-art cli dotnet</tags>
+    <copyright>Copyright (c) 2026 Aldo Vilardy. Original cowsay Copyright 1999-2002 Tony Monroe. cowsay-org Copyright 2016-2024 Andrew Janke.</copyright>
+    <projectSourceUrl>https://github.com/cowsay-dotnet/cowsay-dotnet</projectSourceUrl>
+    <bugTrackerUrl>https://github.com/cowsay-dotnet/cowsay-dotnet/issues</bugTrackerUrl>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
