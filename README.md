@@ -343,7 +343,7 @@ pwsh build/publish.ps1
 
 | Platform | RIDs |
 |----------|------|
-| Windows | `win-x64`, `win-x86`, `win-arm`, `win-arm64` |
+| Windows | `win-x64`, `win-x86`, `win-arm64` |
 | macOS | `osx-x64`, `osx-arm64` |
 | Linux | `linux-x64`, `linux-arm`, `linux-arm64` |
 
