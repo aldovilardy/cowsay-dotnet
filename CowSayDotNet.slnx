@@ -52,6 +52,12 @@
     <File Path="assets/cows/vader.cow" />
     <File Path="assets/cows/www.cow" />
   </Folder>
+  <Folder Name="/build/">
+    <File Path="build/install-packaging-tools.ps1" />
+    <File Path="build/package-all.ps1" />
+    <File Path="build/publish.ps1" />
+    <File Path="build/wsl-build-helper.sh" />
+  </Folder>
   <Folder Name="/packaging/" />
   <Folder Name="/packaging/linux/" />
   <Folder Name="/packaging/linux/.pkg.tar.zst/">
