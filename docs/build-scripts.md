@@ -61,7 +61,7 @@ When `-Rid` is omitted, all 9 RIDs are built:
 
 | Platform | RIDs |
 |----------|------|
-| Windows | `win-x64`, `win-x86`, `win-arm`, `win-arm64` |
+| Windows | `win-x64`, `win-x86`, `win-arm64` |
 | macOS | `osx-x64`, `osx-arm64` |
 | Linux | `linux-x64`, `linux-arm`, `linux-arm64` |
 
@@ -668,8 +668,6 @@ packaging/windows/installer/
     cowsay-dotnet-1.0.0-win-x64.msi
   win-x86/
     cowsay-dotnet-1.0.0-win-x86.msi
-  win-arm/
-    cowsay-dotnet-1.0.0-win-arm.msi
   win-arm64/
     cowsay-dotnet-1.0.0-win-arm64.msi
 ```

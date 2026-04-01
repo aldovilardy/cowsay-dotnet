@@ -68,7 +68,7 @@ $Version = $Props.Project.PropertyGroup.Version
 Write-Host "=== cowsay-dotnet publish v$Version ===" -ForegroundColor Cyan
 
 # ── Define RIDs ─────────────────────────────────────────────────────────────
-$WindowsRids = @("win-x64", "win-x86", "win-arm", "win-arm64")
+$WindowsRids = @("win-x64", "win-x86", "win-arm64")
 $MacRids     = @("osx-x64", "osx-arm64")
 $LinuxRids   = @("linux-x64", "linux-arm", "linux-arm64")
 $AllRids     = $WindowsRids + $MacRids + $LinuxRids

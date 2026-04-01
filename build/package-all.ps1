@@ -57,7 +57,7 @@ $BuildOutput = Join-Path $RepoRoot "build" "output"
 
 $LinuxRids   = @("linux-x64", "linux-arm", "linux-arm64")
 $MacRids     = @("osx-x64", "osx-arm64")
-$WindowsRids = @("win-x64", "win-x86", "win-arm", "win-arm64")
+$WindowsRids = @("win-x64", "win-x86", "win-arm64")
 $AllRids     = $LinuxRids + $MacRids + $WindowsRids
 
 $ValidFormats = @("deb", "rpm", "snap", "arch", "brew-tarball", "msi", "choco", "winget", "psmodule")
@@ -168,7 +168,7 @@ function Add-Result {
 # ═══════════════════════════════════════════════════════════════════════════════
 Write-Host ""
 Write-Host "╔══════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
-Write-Host "║         cowsay-dotnet  package-all  v$Version                  ║" -ForegroundColor Cyan
+Write-Host "║         cowsay-dotnet  package-all  v$Version                   ║" -ForegroundColor Cyan
 Write-Host "╚══════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "  Formats : $($SelectedFormats -join ', ')" -ForegroundColor White
@@ -533,7 +533,7 @@ if ("all" -in $Formats -or $Rid -in $MacRids) {
 # ═══════════════════════════════════════════════════════════════════════════════
 Write-Host ""
 Write-Host "╔══════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
-Write-Host "║                      Build Summary                         ║" -ForegroundColor Cyan
+Write-Host "║                      Build Summary                           ║" -ForegroundColor Cyan
 Write-Host "╚══════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
 Write-Host ""
 

@@ -143,13 +143,13 @@ All artifacts include the 48 cow files from `assets/cows/`.
 
 ## Runtime Identifiers (RIDs)
 
-The project targets **.NET 10** (`net10.0`) and builds for 9 RIDs across 3 platforms:
+The project targets **.NET 10** (`net10.0`) and builds for 7 RIDs across 3 platforms:
 
 | Platform | RIDs | Package Formats |
 |----------|------|----------------|
-| **Windows** | `win-x64`, `win-x86`, `win-arm`, `win-arm64` | MSI, Chocolatey, WinGet, PS Module |
+| **Windows** | `win-x64`, `win-x86`, `win-arm64` | MSI, Chocolatey, WinGet, PS Module |
 | **macOS** | `osx-x64`, `osx-arm64` | Homebrew tarball, macOS .pkg |
-| **Linux** | `linux-x64`, `linux-arm`, `linux-arm64` | deb, rpm, snap, Arch .pkg.tar.zst |
+| **Linux** | `linux-x64`, `linux-arm64` | deb, rpm, snap, Arch .pkg.tar.zst |
 
 ---
 
@@ -157,20 +157,20 @@ The project targets **.NET 10** (`net10.0`) and builds for 9 RIDs across 3 platf
 
 Complete matrix of what gets built for each RID × format combination:
 
-| Format | `linux-x64` | `linux-arm` | `linux-arm64` | `osx-x64` | `osx-arm64` | `win-x64` | `win-x86` | `win-arm` | `win-arm64` |
-|--------|:-----------:|:-----------:|:-------------:|:---------:|:-----------:|:---------:|:---------:|:---------:|:-----------:|
-| `.deb` | x | x | x | | | | | | |
-| `.rpm` | x | x | x | | | | | | |
-| `.snap` | x | x | x | | | | | | |
-| `.pkg.tar.zst` | x | x | x | | | | | | |
-| Brew `.tar.gz` | | | | x | x | | | | |
-| macOS `.pkg` | | | | x | x | | | | |
-| `.msi` | | | | | | x | x | x | x |
-| Choco `.nupkg` | | | | | | x | x | x | x |
-| WinGet YAML | | | | | | x | x | x | x |
-| PS Module | | | | | | x | x | x | x |
+| Format | `linux-x64` | `linux-arm64` | `osx-x64` | `osx-arm64` | `win-x64` | `win-x86` | `win-arm64` |
+|--------|:-----------:|:-----------:|:---------:|:-----------:|:---------:|:---------:|:-----------:|
+| `.deb` | x | x | | | | | |
+| `.rpm` | x | x | | | | | |
+| `.snap` | x | x | | | | | |
+| `.pkg.tar.zst` | x | x | | | | | |
+| Brew `.tar.gz` | | | x | x | | | |
+| macOS `.pkg` | | | x | x | | | |
+| `.msi` | | | | | x | x | x |
+| Choco `.nupkg` | | | | | x | x | x |
+| WinGet YAML | | | | | x | x | x |
+| PS Module | | | | | x | x | x |
 
-**Total: 34 package artifacts** across all formats and RIDs (excluding macOS .pkg which requires native macOS).
+**Total: 26 package artifacts** across all formats and RIDs (excluding macOS .pkg which requires native macOS).
 
 ---
 
