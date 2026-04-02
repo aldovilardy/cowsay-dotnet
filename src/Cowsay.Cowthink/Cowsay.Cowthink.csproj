@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,7 +7,12 @@
     <Nullable>enable</Nullable>
     <AssemblyName>cowthink</AssemblyName>
     <RootNamespace>Cowsay.Cli</RootNamespace>
+    <ApplicationIcon>cow-face_1f42e.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="cow-face_1f42e.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Cowsay.Application\Cowsay.Application.csproj" />
@@ -23,7 +28,7 @@
   <!-- Reuse the same Program.cs from Cowsay.Cli -->
   <ItemGroup>
     <Compile Include="..\Cowsay.Cli\Program.cs" Link="Program.cs" />
-  </ItemGroup>
+  </ItemGroup>  
 
   <ItemGroup>
     <None Update="assets\cows\**\*.cow">
