@@ -8,6 +8,13 @@
     <AssemblyName>cowsay</AssemblyName>
     <RootNamespace>Cowsay.Cli</RootNamespace>
     <ApplicationIcon>cow-face_1f42e.ico</ApplicationIcon>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>cowsay</ToolCommandName>
+    <PackageId>cowsay-dotnet</PackageId>
+    <Title>Cowsay .NET</Title>
+    <Description>A modern .NET reimplementation of the classic Unix cowsay utility.</Description>
+    <PackageTags>cowsay;cli;ascii-art;terminal</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,6 +36,10 @@
     <None Update="assets\cows\**\*.cow">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

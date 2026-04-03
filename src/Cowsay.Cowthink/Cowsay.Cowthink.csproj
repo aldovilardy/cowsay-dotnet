@@ -8,6 +8,13 @@
     <AssemblyName>cowthink</AssemblyName>
     <RootNamespace>Cowsay.Cli</RootNamespace>
     <ApplicationIcon>cow-face_1f42e.ico</ApplicationIcon>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>cowthink</ToolCommandName>
+    <PackageId>cowthink-dotnet</PackageId>
+    <Title>Cowthink .NET</Title>
+    <Description>A modern .NET reimplementation of the classic Unix cowthink utility.</Description>
+    <PackageTags>cowthink;cowsay;cli;ascii-art;terminal</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,6 +41,10 @@
     <None Update="assets\cows\**\*.cow">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
