@@ -22,6 +22,7 @@ cowsay-dotnet generates ASCII art of a cow (or other characters) saying or think
 - **cowsay** and **cowthink** commands (speech and thought bubbles)
 - All 8 preset cow modes: `-b` Borg, `-d` Dead, `-g` Greedy, `-p` Paranoid, `-s` Stoned, `-t` Tired, `-w` Wired, `-y` Youthful
 - Custom eyes (`-e`) and tongue (`-T`) support
+- **Unicode & Emoji Support** - Use modern emojis (🕶️, 👀, 😎, 👅) for eyes and tongue with proper visual alignment
 - Configurable word wrap width (`-W`) and no-wrap mode (`-n`)
 - **48 classic cow files** included (all original cowfiles from the cowsay distribution)
 - `COWPATH` environment variable support for custom cow file directories
@@ -205,6 +206,15 @@ cowsay -s "Far out, man..."             # Stoned mode (** eyes)
 
 ```bash
 cowsay -e "OO" -T "U " "Custom face!"
+```
+
+### Unicode & Emoji Support
+
+```bash
+cowsay -e "👀" "I see you"           # Emoji eyes
+cowsay -T "👅" "Yummy"               # Emoji tongue
+cowsay -e "🕶️" -T "👅" "Cool"       # Both emoji eyes and tongue
+cowsay "Hello 👋 World"              # Emoji in message
 ```
 
 ### Piping from Standard Input
