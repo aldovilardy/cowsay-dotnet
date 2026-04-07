@@ -1,5 +1,6 @@
 using CowSay.Core.Services;
 using Shouldly;
+using System.Globalization;
 
 namespace Cowsay.Core.Tests;
 
@@ -155,5 +156,72 @@ public class BubbleServiceTests
 
         lines[0].ShouldContain("------");
         lines[^1].ShouldContain("------");
+    }
+
+    [Fact]
+    public void CreateBubble_EmojiInMessage_ProperlyPadded()
+    {
+        var result = _sut.CreateBubble("👀", false, 40);
+
+        result.ShouldContain("< 👀 >");
+    }
+
+    [Fact]
+    public void CreateBubble_MultipleEmojisInMessage_ProperlyPadded()
+    {
+        var result = _sut.CreateBubble("👀👂👃", false, 40);
+
+        result.ShouldContain("< 👀👂👃 >");
+    }
+
+    [Fact]
+    public void CreateBubble_EmojiWithText_ProperlyPadded()
+    {
+        var result = _sut.CreateBubble("Hello 👀 World", false, 40);
+
+        result.ShouldContain("< Hello 👀 World >");
+    }
+
+    [Fact]
+    public void CreateBubble_EmojiWidth_TopBorderCorrectSize()
+    {
+        var result = _sut.CreateBubble("👀👂👃👄", false, 40);
+        var lines = result.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+
+        var contentLine = lines[1];
+        var topBorder = lines[0];
+
+        var contentVisualLength = new StringInfo(contentLine.Trim()).LengthInTextElements;
+        var expectedVisualLength = new StringInfo("👀👂👃👄").LengthInTextElements;
+
+        contentVisualLength.ShouldBe(expectedVisualLength + 4);
+    }
+
+    [Fact]
+    public void CreateBubble_MultipleEmojis_WrapsCorrectly()
+    {
+        var result = _sut.CreateBubble("👀👂👃👄👅👆👇👈👉👉", false, 5);
+
+        result.ShouldNotBeNullOrEmpty();
+        var lines = result.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+
+        lines.Length.ShouldBeGreaterThan(3);
+    }
+
+    [Fact]
+    public void CreateBubble_NoWrapMode_PreservesEmojiLineBreaks()
+    {
+        var result = _sut.CreateBubble("👀\n👂", false, 40, noWrap: true);
+
+        result.ShouldContain("👀");
+        result.ShouldContain("👂");
+    }
+
+    [Fact]
+    public void CreateBubble_ThoughtBubbleWithEmoji_UsesParentheses()
+    {
+        var result = _sut.CreateBubble("👀", true, 40);
+
+        result.ShouldContain("( 👀 )");
     }
 }

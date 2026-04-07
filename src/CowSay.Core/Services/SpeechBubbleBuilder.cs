@@ -1,4 +1,5 @@
 ﻿using CowSay.Core.Models;
+using System.Globalization;
 using System.Text;
 
 namespace CowSay.Core.Services;
@@ -24,11 +25,11 @@ public class SpeechBubbleBuilder
         var bubbleType = isThought ? SpeechBubble.BubbleType.Thought : SpeechBubble.BubbleType.Speech;
         var bubble = new SpeechBubble(message, bubbleType);
         var lines = SplitMessage(bubble.Content);
-        var maxLineLength = lines.Max(line => line.Length);
+        var maxLineLength = lines.Max(line => GetVisualLength(line));
         var borderChar = bubble.Type == SpeechBubble.BubbleType.Speech ? '\\' : 'o';
         var topBorder = $" {new string('_', maxLineLength + 2)} ";
         var bottomBorder = $" {new string('-', maxLineLength + 2)} ";
-        var bubbleLines = lines.Select(line => $"| {line.PadRight(maxLineLength)} |").ToArray();
+        var bubbleLines = lines.Select(line => $"| {PadToVisualLength(line, maxLineLength)} |").ToArray();
 
         return $"{topBorder}\n{string.Join("\n", bubbleLines)}\n{bottomBorder}";
     }
@@ -108,5 +109,32 @@ public class SpeechBubbleBuilder
             lines.Add(sb.ToString());
 
         return [.. lines];
+    }
+
+    /// <summary>
+    /// Calculates the visual length of a string considering Unicode grapheme clusters (e.g., emojis).
+    /// </summary>
+    /// <param name="text">The text to measure.</param>
+    /// <returns>The visual length in text elements.</returns>
+    private static int GetVisualLength(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return 0;
+        return new StringInfo(text).LengthInTextElements;
+    }
+
+    /// <summary>
+    /// Pads a string to the specified visual length using spaces, supporting Unicode text elements like emojis.
+    /// </summary>
+    /// <param name="text">The text to pad.</param>
+    /// <param name="totalVisualLength">The desired visual length.</param>
+    /// <returns>The padded string.</returns>
+    private static string PadToVisualLength(string text, int totalVisualLength)
+    {
+        var currentLength = GetVisualLength(text);
+        var paddingNeeded = totalVisualLength - currentLength;
+        if (paddingNeeded <= 0)
+            return text;
+        return text + new string(' ', paddingNeeded);
     }
 }

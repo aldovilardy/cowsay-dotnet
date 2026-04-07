@@ -69,10 +69,13 @@ public class FaceFactoryTests
     }
 
     [Fact]
-    public void Custom_Tongue_Not_Two_Characters_Throws()
+    public void Custom_Tongue_Not_Two_Characters_Falls_Back_To_Spaces()
     {
-        Should.Throw<ArgumentException>(() => FaceFactory.Create(CowMode.Default, tongue: "A"));
-        Should.Throw<ArgumentException>(() => FaceFactory.Create(CowMode.Default, tongue: "ABC"));
+        var face = FaceFactory.Create(CowMode.Default, tongue: "A");
+        face.Tongue.ShouldBe("A");
+
+        var face2 = FaceFactory.Create(CowMode.Default, tongue: "ABC");
+        face2.Tongue.ShouldBe("  ");
     }
 
     [Fact]

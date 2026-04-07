@@ -76,10 +76,10 @@ public class FaceFactoryTests
     }
 
     [Fact]
-    public void Create_CustomTongueNot2Chars_ThrowsArgumentException()
+    public void Create_CustomTongueNot2Chars_FallbackToDefault()
     {
-        Should.Throw<ArgumentException>(() =>
-            FaceFactory.Create(CowMode.Default, tongue: "abc"));
+        var face = FaceFactory.Create(CowMode.Default, tongue: "abc");
+        face.Tongue.ShouldBe("  ");
     }
 
     [Fact]
@@ -96,5 +96,53 @@ public class FaceFactoryTests
         var face = FaceFactory.Create(CowMode.Default, tongue: "!@");
 
         face.Tongue.ShouldBe("!@");
+    }
+
+    [Fact]
+    public void Create_SingleEmojiEyes_Accepted()
+    {
+        var face = FaceFactory.Create(CowMode.Default, eyes: "👀");
+
+        face.Eyes.ShouldBe("👀");
+    }
+
+    [Fact]
+    public void Create_TwoEmojiEyes_BothAccepted()
+    {
+        var face = FaceFactory.Create(CowMode.Default, eyes: "👀👂");
+
+        face.Eyes.ShouldBe("👀👂");
+    }
+
+    [Fact]
+    public void Create_ThreeEmojiEyes_TruncatedToTwo()
+    {
+        var face = FaceFactory.Create(CowMode.Default, eyes: "👀👂👃");
+
+        face.Eyes.ShouldBe("👀👂");
+    }
+
+    [Fact]
+    public void Create_EmojiTongue_Accepted()
+    {
+        var face = FaceFactory.Create(CowMode.Default, tongue: "👅");
+
+        face.Tongue.ShouldBe("👅");
+    }
+
+    [Fact]
+    public void Create_CombinedEmojiAndAsciiEyes_Accepted()
+    {
+        var face = FaceFactory.Create(CowMode.Default, eyes: "😎👌");
+
+        face.Eyes.ShouldBe("😎👌");
+    }
+
+    [Fact]
+    public void Create_InvalidTongueLength_FallbackToDefault()
+    {
+        var face = FaceFactory.Create(CowMode.Default, tongue: "👀👂👃");
+
+        face.Tongue.ShouldBe("  ");
     }
 }

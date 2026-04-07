@@ -7,6 +7,11 @@ using CowSay.Core.Models;
 using CowSay.Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System.CommandLine;
+using System.Text;
+
+// Force the console to use UTF-8 encoding for Emojis
+Console.OutputEncoding = Encoding.UTF8;
+Console.InputEncoding = Encoding.UTF8;
 
 // 1. Dependency container configuration (DI)
 var services = new ServiceCollection();

@@ -1,4 +1,6 @@
 ﻿using CowSay.Core.Interfaces;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Text;
 
 namespace CowSay.Core.Services;
@@ -17,7 +19,7 @@ public class BubbleService : IBubbleService
         if (lines.Count == 0)
             lines.Add(string.Empty);
 
-        var maxLineLength = lines.Max(line => line.Length);
+        var maxLineLength = lines.Max(line => GetVisualLength(line));
         var topBorder = $" {new string('-', maxLineLength + 2)} ";
         var bottomBorder = $" {new string('-', maxLineLength + 2)} ";
 
@@ -25,10 +27,10 @@ public class BubbleService : IBubbleService
         sb.AppendLine(topBorder);
 
         if (lines.Count == 1)
-            sb.AppendLine($"{GetLeftBorder(0, 1, isThought)} {lines[0].PadRight(maxLineLength)} {GetRightBorder(0, 1, isThought)}");
+            sb.AppendLine($"{GetLeftBorder(0, 1, isThought)} {PadToVisualLength(lines[0], maxLineLength)} {GetRightBorder(0, 1, isThought)}");
         else
             for (var i = 0; i < lines.Count; i++)
-                sb.AppendLine($"{GetLeftBorder(i, lines.Count, isThought)} {lines[i].PadRight(maxLineLength)} {GetRightBorder(i, lines.Count, isThought)}");
+                sb.AppendLine($"{GetLeftBorder(i, lines.Count, isThought)} {PadToVisualLength(lines[i], maxLineLength)} {GetRightBorder(i, lines.Count, isThought)}");
 
         sb.Append(bottomBorder);
         return sb.ToString();
@@ -71,46 +73,76 @@ public class BubbleService : IBubbleService
         var words = message.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
         var lines = new List<string>();
         var currentLine = new StringBuilder();
+        var currentVisualLength = 0;
 
         foreach (var word in words)
         {
-            if (word.Length > width)
+            var wordVisualLength = GetVisualLength(word);
+
+            if (wordVisualLength > width)
             {
                 if (currentLine.Length > 0)
                 {
                     lines.Add(currentLine.ToString());
                     currentLine.Clear();
+                    currentVisualLength = 0;
                 }
 
-                for (var i = 0; i < word.Length; i += width)
+                for (var i = 0; i < wordVisualLength; i += width)
                 {
-                    var chunkLength = Math.Min(width, word.Length - i);
-                    lines.Add(word.Substring(i, chunkLength));
+                    var chunkLength = Math.Min(width, wordVisualLength - i);
+                    lines.Add(SubstringByVisualLength(word, i, chunkLength));
                 }
 
                 continue;
             }
 
-            var proposedLength = currentLine.Length == 0
-                ? word.Length
-                : currentLine.Length + 1 + word.Length;
+            var proposedLength = currentVisualLength == 0
+                ? wordVisualLength
+                : currentVisualLength + 1 + wordVisualLength;
 
             if (proposedLength > width)
             {
                 lines.Add(currentLine.ToString());
                 currentLine.Clear();
+                currentVisualLength = 0;
             }
 
             if (currentLine.Length > 0)
+            {
                 currentLine.Append(' ');
+                currentVisualLength++;
+            }
 
             currentLine.Append(word);
+            currentVisualLength += wordVisualLength;
         }
 
         if (currentLine.Length > 0)
             lines.Add(currentLine.ToString());
 
         return lines;
+    }
+
+    /// <summary>
+    /// Extracts a substring based on visual text elements (Unicode grapheme clusters).
+    /// </summary>
+    /// <param name="text">The input string from which to extract the substring.</param>
+    /// <param name="start">The zero-based starting index of the substring in terms of visual text elements.</param>
+    /// <param name="length">The number of visual text elements to include in the substring.</param>
+    /// <returns>A substring containing the specified number of visual text elements starting from the specified index.</returns>
+    private static string SubstringByVisualLength(string text, int start, int length)
+    {
+        var info = new StringInfo(text);
+        var startIndex = Math.Min(start, info.LengthInTextElements);
+        var remainingLength = info.LengthInTextElements - startIndex;
+        var extractLength = Math.Min(length, remainingLength);
+
+        return extractLength switch
+        {
+            <= 0 => string.Empty,
+            _ => info.SubstringByTextElements(startIndex, extractLength)
+        };
     }
 
     /// <summary>
@@ -122,22 +154,15 @@ public class BubbleService : IBubbleService
     /// <param name="count">The total number of items in the collection. Must be greater than zero.</param>
     /// <param name="isThought">A value indicating whether the item represents a thought. If <see langword="true"/>, a specific border character is used.</param>
     /// <returns>A character representing the left border for the item, based on its position and whether it is a thought.</returns>
-    private static char GetLeftBorder(int index, int count, bool isThought)
-    {
-        if (isThought)
-            return '(';
-
-        if (count == 1)
-            return '<';
-
-        if (index == 0)
-            return '/';
-
-        if (index == count - 1)
-            return '\\';
-
-        return '|';
-    }
+    private static char GetLeftBorder(int index, int count, bool isThought) => 
+        index switch
+        {
+            _ when isThought => '(',
+            _ when count == 1 => '<',
+            0 => '/',
+            _ when index == count - 1 => '\\',
+            _ => '|'
+        };
 
     /// <summary>
     /// Determines the appropriate right border character for an item based on its position and context.
@@ -153,20 +178,35 @@ public class BubbleService : IBubbleService
     /// <returns>
     /// A character representing the right border for the specified item. The character varies depending on the item's position and whether it is a thought.
     /// </returns>
-    private static char GetRightBorder(int index, int count, bool isThought)
+    private static char GetRightBorder(int index, int count, bool isThought) => 
+        index switch
+        {
+            _ when isThought => ')',
+            _ when count == 1 => '>',
+            0 => '\\',
+            _ when index == count - 1 => '/',
+            _ => '|'
+        };
+
+    /// <summary>
+    /// Calculates the visual length of a string considering Unicode grapheme clusters (e.g., emojis).
+    /// </summary>
+    /// <param name="text">The text to measure.</param>
+    /// <returns>The visual length in text elements.</returns>
+    private static int GetVisualLength(string text) => 
+        string.IsNullOrEmpty(text) ? 0 : new StringInfo(text).LengthInTextElements;
+
+    /// <summary>
+    /// Pads a string to the specified visual length using spaces, supporting Unicode text elements like emojis.
+    /// </summary>
+    /// <param name="text">The text to pad.</param>
+    /// <param name="totalVisualLength">The desired visual length.</param>
+    /// <returns>The padded string.</returns>
+    private static string PadToVisualLength(string text, int totalVisualLength)
     {
-        if (isThought)
-            return ')';
+        var currentLength = GetVisualLength(text);
+        var paddingNeeded = totalVisualLength - currentLength;
 
-        if (count == 1)
-            return '>';
-
-        if (index == 0)
-            return '\\';
-
-        if (index == count - 1)
-            return '/';
-
-        return '|';
+        return paddingNeeded <= 0 ? text : $"{text}{new string(' ', paddingNeeded)}";
     }
 }

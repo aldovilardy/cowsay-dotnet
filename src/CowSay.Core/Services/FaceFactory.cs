@@ -1,4 +1,5 @@
 ﻿using CowSay.Core.Models;
+using System.Globalization;
 
 namespace CowSay.Core.Services;
 
@@ -51,24 +52,24 @@ public class FaceFactory
     /// or the input itself if it is one or two characters long.
     /// </returns>
     private static string NormalizeEyes(string? eyes) =>
-        string.IsNullOrEmpty(eyes) ? "oo" : eyes.Length <= 2 ? eyes : eyes[..2];
+        string.IsNullOrEmpty(eyes)
+        ? "oo"
+        : new StringInfo(eyes).LengthInTextElements <= 2
+        ? eyes
+        : new StringInfo(eyes).SubstringByTextElements(0, 2);
 
     /// <summary>
     /// Normalizes the specified tongue code to a two-character string.
     /// </summary>
-    /// <param name="tongue">The tongue code to normalize. Must be exactly two characters, or null or empty.</param>
+    /// <param name="tongue">The tongue code to normalize. Accepts 1 or 2 Unicode text elements.</param>
     /// <returns>
-    /// A two-character string representing the normalized tongue code. Returns two spaces if <paramref name="tongue"/> is null or empty.
+    /// A string representing the normalized tongue code. Returns two spaces if <paramref name="tongue"/> is null or empty, 
+    /// or if it has more than 2 text elements.
     /// </returns>
-    /// <exception cref="ArgumentException">Thrown if <paramref name="tongue"/> is not null or empty and does not have exactly two characters.</exception>
-    private static string NormalizeTongue(string? tongue)
-    {
-        if (string.IsNullOrEmpty(tongue))
-            return "  ";
-
-        if (tongue.Length != 2)
-            throw new ArgumentException("Tongue must be exactly 2 characters.", nameof(tongue));
-
-        return tongue;
-    }
+    private static string NormalizeTongue(string? tongue) => 
+        !string.IsNullOrEmpty(tongue) 
+        && new StringInfo(tongue).LengthInTextElements >= 1 
+        && new StringInfo(tongue).LengthInTextElements <= 2 
+        ? tongue 
+        : "  ";
 }
